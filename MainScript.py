@@ -29,5 +29,12 @@ while (not(got_int)):
     except ValueError:
         print('Please only input digits')
 
-# Find the lentgh of the given integer
+# Find the length of the given integer
 len_num = math.floor(math.log10(num_given))+1
+
+counter = 0
+extracted = num_given // (10 ** (len_num - counter - 1))
+
+while counter < len_num:
+    extracted = num_given // (10 ** (len_num - counter - 1))
+    counter += 1
