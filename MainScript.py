@@ -18,7 +18,7 @@ for row in csvreader:
     data_B.append(row)
 file.close()
 
-# print(data_A[0][0])
+# print(data_A[1][0])
 
 # Ask for an integer from the user through the terminal and repeat until the input is an actual integer
 got_int = False
@@ -35,6 +35,10 @@ len_num = math.floor(math.log10(num_given))+1
 counter = 0
 extracted = num_given // (10 ** (len_num - counter - 1))
 
-while counter < len_num:
+while counter <= len_num:
     extracted = num_given // (10 ** (len_num - counter - 1))
+    for i in range(0,len(data_A)):
+        len_A = math.floor(math.log10(int(data_A[i][0])))+1
+        if(len_A > counter):
+            oper_num_A = int(data_A[i][0]) // (10 ** (len_A - counter - 1))
     counter += 1
