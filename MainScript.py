@@ -35,11 +35,20 @@ while (not(got_int)):
 len_num = math.floor(math.log10(num_given))+1
 
 prefix_A = initial_prefix
-counter = 0
+prefix_B = initial_prefix
+
 cost_A = -1
+cost_B = -1
+
 oper_A_Flag = True
+oper_B_Flag = True
+
 count_A_previous = -1
 count_A_cur = -1
+count_B_previous = -1
+count_B_cur = -1
+
+counter = 0
 extracted = num_given // (10 ** (len_num - counter - 1))
 
 while (counter <= len_num) and oper_A_Flag:
@@ -65,7 +74,7 @@ while (counter <= len_num) and oper_A_Flag:
 
     counter += 1
 
-if((prefix_A == initial_prefix) and (cost_A == -1)):
+if((prefix_A == initial_prefix) and (cost_A == -1) and (prefix_B == initial_prefix) and (cost_B == -1)):
     print("Unfortunatley, none of our operators can help you.")
 else:
     print(prefix_A,cost_A)
