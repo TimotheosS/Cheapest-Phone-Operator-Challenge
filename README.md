@@ -1,6 +1,6 @@
 # Programming-Callenge
 
-This is a repository for the solution of the Programming Challenge by ValueChecker.net found here [Link to Instructions](https://docs.google.com/document/d/1t8BSicFnJellmzg2tBNoAL4hoes3hkyBljowWbBeVrg/edit).
+This is a repository for the solution of the Programming Challenge by ValueChecker.net found [here](https://docs.google.com/document/d/1t8BSicFnJellmzg2tBNoAL4hoes3hkyBljowWbBeVrg/edit).
 
 For solving this challenge I used Python3 and the libraries csv and math.
 
