@@ -46,7 +46,7 @@ for c in range(0,len(data_test)):
             c += 1 
 
     print("Given Number:", num_given)
-    total_test_cases += 1
+    total_test_cases += 1 # Increase here to avoid adding the not integer inputs
     # Find the length of the given integer
     len_num = math.floor(math.log10(num_given))+1
 
