@@ -1,11 +1,12 @@
 import csv
 import math
 
-#TODO: Add comments and try to improve and update ReadMe
+#TODO: Add comments and update ReadMe
 
 initial_prefix = 111111111 # A number that cannot be a prefix
 
 # Read csv files for each operator
+# For Operator A
 file = open("OperatorA.csv")
 csvreader = csv.reader(file)
 header = next(csvreader)
@@ -14,6 +15,7 @@ for row in csvreader:
     data_A.append(row)
 file.close()
 
+# For Operator B
 file = open("OperatorB.csv")
 csvreader = csv.reader(file)
 header = next(csvreader)
@@ -64,36 +66,40 @@ while (counter <= len_num) and (oper_A_Flag or oper_B_Flag):
 
     # For Operator A
     for i in range(0,len(data_A)):
-        len_A = math.floor(math.log10(int(data_A[i][0])))+1        
-        if(len_A > counter):
+        len_A = math.floor(math.log10(int(data_A[i][0])))+1  
+        if(len_A > counter):    # Proceed only for entries whose length is bigger than the length of the extracted part of the nubmer given
             oper_num_A = int(data_A[i][0]) // (10 ** (len_A - counter - 1))
             if(oper_num_A == extracted):
                 count_A_cur += 1
-                if(len_A == math.floor(math.log10(extracted))+1):
+                if(len_A == math.floor(math.log10(extracted))+1):   # If there is a match, save the prefix, the price and skip the rest of the csv entries
                     prefix_A = data_A[i][0]
                     cost_A = float(data_A[i][1])
                     break
 
     if((count_A_cur == 0) and (count_A_previous == 1) and (math.floor(math.log10(int(prefix_A)))+1 == math.floor(math.log10(extracted)))):
+        # Found an exact match in the csv and it's the only match and length(csv_Entry) = length(extracted part of the number given)
         oper_A_Flag = False
-    elif((count_A_cur == 0) and (count_A_previous == 0)):        
+    elif((count_A_cur == 0) and (count_A_previous == 0)):
+        # No match between any entry in the csv and the extracted part of the number given in the two previous loops         
         oper_A_Flag = False   
 
     # For Operator B
     for i in range(0,len(data_B)):
         len_B = math.floor(math.log10(int(data_B[i][0])))+1        
-        if(len_B > counter):
+        if(len_B > counter):    # Proceed only for entries whose length is bigger than the length of the extracted part of the nubmer given
             oper_num_B = int(data_B[i][0]) // (10 ** (len_B - counter - 1))
             if(oper_num_B == extracted):
                 count_B_cur += 1
-                if(len_B == math.floor(math.log10(extracted))+1):
+                if(len_B == math.floor(math.log10(extracted))+1):   # If there is a match, save the prefix, the price and skip the rest of the csv entries
                     prefix_B = data_B[i][0]
                     cost_B = float(data_B[i][1])
                     break
 
     if((count_B_cur == 0) and (count_B_previous == 1) and (math.floor(math.log10(int(prefix_B)))+1 == math.floor(math.log10(extracted)))):
+        # Found an exact match in the csv and it's the only match and length(csv_Entry) = length(extracted part of the number given)
         oper_B_Flag = False
-    elif((count_B_cur == 0) and (count_B_previous == 0)):        
+    elif((count_B_cur == 0) and (count_B_previous == 0)):
+        # No match between any entry in the csv and the extracted part of the number given in the two previous loops     
         oper_B_Flag = False   
 
     # Increase counter that will help on extracting the next digit
