@@ -31,6 +31,9 @@ for row in csvreader:
     data_B.append(row)
 file.close()
 
+correct = 0
+total_test_cases = 0
+
 for c in range(0,len(data_test)):
     # Ask for an integer from the user through the terminal and repeat until the input is an actual integer
     got_int = False
@@ -43,6 +46,7 @@ for c in range(0,len(data_test)):
             c += 1 
 
     print("Given Number:", num_given)
+    total_test_cases += 1
     # Find the length of the given integer
     len_num = math.floor(math.log10(num_given))+1
 
@@ -120,6 +124,7 @@ for c in range(0,len(data_test)):
         print("Unfortunatley, none of our operators can help you.")
         if ((cost_A == float(data_test[c][1])) or(cost_B == float(data_test[c][1]))):
             print("Correct")
+            correct += 1
         else:
             print("False")
     elif(prefix_A != initial_prefix and prefix_B == initial_prefix):
@@ -127,6 +132,7 @@ for c in range(0,len(data_test)):
         print("Operator A will help you at the price of:",cost_A, "per minute")
         if (cost_A == float(data_test[c][1])):
             print("Correct")
+            correct += 1
         else:
             print("False")
     elif(prefix_A == initial_prefix and prefix_B != initial_prefix):
@@ -134,6 +140,7 @@ for c in range(0,len(data_test)):
         print("Operator B will help you at the price of:",cost_B, "per minute")
         if (cost_B == float(data_test[c][1])):
             print("Correct")
+            correct += 1
         else:
             print("False")
     else:
@@ -143,6 +150,7 @@ for c in range(0,len(data_test)):
             print("Operator A will help you at the price of:",cost_A, "per minute")
             if (cost_A == float(data_test[c][1])):
                 print("Correct")
+                correct += 1
             else:
                 print("False")
         else:
@@ -150,6 +158,8 @@ for c in range(0,len(data_test)):
             print("Operator B will help you at the price of:",cost_B, "per minute")
             if (cost_B == float(data_test[c][1])):
                 print("Correct")
+                correct += 1
             else:
                 print("False")
     print("\n")
+print("Number of correct outputs:", correct,"out of:", total_test_cases,"test cases.")
