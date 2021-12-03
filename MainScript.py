@@ -1,8 +1,6 @@
 import csv
 import math
 
-#TODO: Add comments and update ReadMe
-
 initial_prefix = 111111111 # A number that cannot be a prefix
 
 # Read csv files for each operator
