@@ -3,6 +3,20 @@ import math
 
 initial_prefix = 111111111 # A number that cannot be a prefix
 
+def checkForMatch(data_A, counter, extracted, count_cur, cost, prefix):
+    # Check if there is at least one match in the data list given
+    for i in range(0,len(data_A)):
+        len_A = math.floor(math.log10(int(data_A[i][0])))+1  
+        if(len_A > counter):    # Proceed only for entries whose length is bigger than the length of the extracted part of the nubmer given
+            oper_num_A = int(data_A[i][0]) // (10 ** (len_A - counter - 1))
+            if(oper_num_A == extracted):
+                count_cur += 1
+                if(len_A == math.floor(math.log10(extracted))+1):   # If there is a match, save the prefix, the price and skip the rest of the csv entries
+                    prefix = data_A[i][0]
+                    cost = float(data_A[i][1])
+                    break
+    return count_cur, prefix, cost
+
 # Read csv file for the test values
 file = open("TestValues.csv")
 csvreader = csv.reader(file)
@@ -77,18 +91,9 @@ for c in range(0,len(data_test)):
 
         # add the next digit of the integer given in the variable extracted
         extracted = num_given // (10 ** (len_num - counter - 1))
-
+        
         # For Operator A
-        for i in range(0,len(data_A)):
-            len_A = math.floor(math.log10(int(data_A[i][0])))+1  
-            if(len_A > counter):    # Proceed only for entries whose length is bigger than the length of the extracted part of the nubmer given
-                oper_num_A = int(data_A[i][0]) // (10 ** (len_A - counter - 1))
-                if(oper_num_A == extracted):
-                    count_A_cur += 1
-                    if(len_A == math.floor(math.log10(extracted))+1):   # If there is a match, save the prefix, the price and skip the rest of the csv entries
-                        prefix_A = data_A[i][0]
-                        cost_A = float(data_A[i][1])
-                        break
+        count_A_cur, prefix_A, cost_A = checkForMatch(data_A, counter, extracted, count_A_cur, cost_A, prefix_A)
 
         if((count_A_cur == 0) and (count_A_previous == 1) and (math.floor(math.log10(int(prefix_A)))+1 == math.floor(math.log10(extracted)))):
             # Found an exact match in the csv and it's the only match and length(csv_Entry) = length(extracted part of the number given)
@@ -98,17 +103,8 @@ for c in range(0,len(data_test)):
             oper_A_Flag = False   
 
         # For Operator B
-        for i in range(0,len(data_B)):
-            len_B = math.floor(math.log10(int(data_B[i][0])))+1        
-            if(len_B > counter):    # Proceed only for entries whose length is bigger than the length of the extracted part of the nubmer given
-                oper_num_B = int(data_B[i][0]) // (10 ** (len_B - counter - 1))
-                if(oper_num_B == extracted):
-                    count_B_cur += 1
-                    if(len_B == math.floor(math.log10(extracted))+1):   # If there is a match, save the prefix, the price and skip the rest of the csv entries
-                        prefix_B = data_B[i][0]
-                        cost_B = float(data_B[i][1])
-                        break
-
+        count_B_cur, prefix_B, cost_B = checkForMatch(data_B, counter, extracted, count_B_cur, cost_B, prefix_B)
+        
         if((count_B_cur == 0) and (count_B_previous == 1) and (math.floor(math.log10(int(prefix_B)))+1 == math.floor(math.log10(extracted)))):
             # Found an exact match in the csv and it's the only match and length(csv_Entry) = length(extracted part of the number given)
             oper_B_Flag = False
