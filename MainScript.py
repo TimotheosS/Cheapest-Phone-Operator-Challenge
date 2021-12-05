@@ -17,33 +17,26 @@ def checkForMatch(data_A, counter, extracted, count_cur, cost, prefix):
                     break
     return count_cur, prefix, cost
 
+def read_csv(filename):
+    # For reading csv files
+    file = open(filename)
+    csvreader = csv.reader(file)
+    header = next(csvreader)
+    data = []
+    for row in csvreader:
+        data.append(row)
+    file.close()
+    return(data)    
+
+
 # Read csv file for the test values
-file = open("TestValues.csv")
-csvreader = csv.reader(file)
-header = next(csvreader)
-data_test = []
-for row in csvreader:
-    data_test.append(row)
-file.close()
+data_test = read_csv("TestValues.csv")
 
 # Read csv files for each operator
 # For Operator A
-file = open("OperatorA.csv")
-csvreader = csv.reader(file)
-header = next(csvreader)
-data_A = []
-for row in csvreader:
-    data_A.append(row)
-file.close()
-
+data_A = read_csv("OperatorA.csv")
 # For Operator B
-file = open("OperatorB.csv")
-csvreader = csv.reader(file)
-header = next(csvreader)
-data_B = []
-for row in csvreader:
-    data_B.append(row)
-file.close()
+data_B = read_csv("OperatorB.csv")
 
 correct = 0
 total_test_cases = 0
